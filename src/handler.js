@@ -31,27 +31,26 @@ const addNoteHandler = (request, h) => {
   notes.push(newNote);
 
   // eslint-disable-next-line no-trailing-spaces
-  const isSuccess = notes.filter((note) => note.id === id ).length > 0 ; 
+  const isSuccess = notes.filter((note) => note.id === id).length > 0;
 
   if (isSuccess) {
-    const respone = h.response({
-      status: 'success',
-      message: 'Catatan berhasil ditambahkan',
+    const response = h.response({
+      status: "success",
+      message: "Catatan berhasil ditambahkan",
       data: {
         noteId: id,
       },
     });
-    respone.code(201);
-    return respone;
+    response.code(201);
+    return response;
   }
 
-  const respone = h.response({
-    status: 'fail',
-    message: 'Catatan gagal ditambahkan',
+  const response = h.response({
+    status: "fail",
+    message: "Catatan gagal ditambahkan",
   });
-  respone.code(500);
-  return respone;
-
+  response.code(500);
+  return response;
 };
 
 const getAllNotesHandler = () => ({
@@ -66,9 +65,9 @@ const getNoteByIdHandler = (request, h) => {
 
   const note = notes.filter((n) => n.id === id)[0];
 
-  if(note !== undefined) {
+  if (note !== undefined) {
     return {
-      status: 'success',
+      status: "success",
       data: {
         note,
       },
@@ -76,10 +75,42 @@ const getNoteByIdHandler = (request, h) => {
   }
 
   const response = h.response({
-    status: 'fail',
-    message: 'Catatan tidak ditemukan!',
+    status: "fail",
+    message: "Catatan tidak ditemukan!",
   });
   response.code(404);
   return response;
 };
-module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler };
+
+const editNoteByIdHandler = (request, h) => {
+  const { id } = request.params;
+
+  const { title, tags, body } = request.payload;
+  const updatedAt = new Date().toISOString();
+
+  const index = notes.findIndex((note) => note.id === id);
+
+  if (index !== -1) {
+    notes[index] = {
+      ...notes[index],
+      title,
+      tags,
+      body,
+      updatedAt,
+    };
+    const response = h.response({
+      status: "success",
+      message: "Catatan berhasil diperbarui",
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: 'fail',
+    message: 'Gagal memperbarui catatan. Id tidak ditemukan!',
+  });
+  response.code(404);
+  return response;
+};
+module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByIdHandler };

@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable quotes */
-const { addNoteHandler, getAllNotesHandler, getNoteByIdHandler } = require("./handler");
+const { addNoteHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByIdHandler } = require("./handler");
 
 const routes = [
   {
@@ -12,13 +12,16 @@ const routes = [
     method: 'GET',
     path: '/notes',
     handler: getAllNotesHandler,
-
   },
   {
     method: 'GET',
     path: '/notes/{id}',
     handler: getNoteByIdHandler,
-
+  },
+  {
+    method: 'PUT',
+    path: '/notes/{id}',
+    handler: editNoteByIdHandler,
   },
 ];
 // eslint-disable-next-line linebreak-style
