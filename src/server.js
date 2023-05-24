@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-// eslint-disable-next-line linebreak-style
-/* eslint-disable quotes */
-/* eslint-disable linebreak-style */
 const Hapi = require("@hapi/hapi");
 const routes = require("./routes");
 

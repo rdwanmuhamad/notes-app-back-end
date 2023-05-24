@@ -1,14 +1,3 @@
-/* eslint-disable linebreak-style */
-// eslint-disable-next-line linebreak-style
-/* eslint-disable padded-blocks */
-/* eslint-disable linebreak-style */
-/* eslint-disable semi-spacing */
-/* eslint-disable quotes */
-// eslint-disable-next-line linebreak-style
-// eslint-disable-next-line linebreak-style
-/* eslint-disable space-in-parens */
-/* eslint-disable linebreak-style */
-// eslint-disable-next-line quotes
 const { nanoid } = require("nanoid");
 const notes = require("./notes");
 
@@ -30,7 +19,6 @@ const addNoteHandler = (request, h) => {
 
   notes.push(newNote);
 
-  // eslint-disable-next-line no-trailing-spaces
   const isSuccess = notes.filter((note) => note.id === id).length > 0;
 
   if (isSuccess) {

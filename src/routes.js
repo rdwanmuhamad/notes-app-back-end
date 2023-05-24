@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable quotes */
 const {
   addNoteHandler,
   getAllNotesHandler,
